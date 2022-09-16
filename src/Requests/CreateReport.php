@@ -22,9 +22,9 @@ class CreateReport extends PlagiarismSearchService
      * @param string $file
      * @return CreateReport
      */
-    public function file(string $file): CreateReport
+    public function file(string $realpath): CreateReport
     {
-        $this->data = array_merge($this->data, ['file' => $file]);
+        $this->data = array_merge($this->data, ['file' => $realpath]);
         return $this;
     }
 
@@ -195,6 +195,19 @@ class CreateReport extends PlagiarismSearchService
     public function searchWebExcludeUrls(array $searchWebExcludeUrls): CreateReport
     {
         $this->data = array_merge($this->data, ['search_web_exclude_urls' => $searchWebExcludeUrls]);
+        return $this;
+    }
+
+    /**
+     * @param array $searchWebExcludeUrls
+     * @return CreateReport
+     */
+    public function files(array $files): CreateReport
+    {
+        $this->files = array_map(function ($file) {
+            return ['file' => $file];
+        }, $files);
+
         return $this;
     }
 

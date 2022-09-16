@@ -12,7 +12,7 @@ class ListReports extends PlagiarismSearchService
     protected int $limit = 10;
     protected int $show_relations = 1;
 
-    function relax(): void
+    private function relax(): void
     {/*do absolutely nothing*/
     }
 
@@ -21,9 +21,9 @@ class ListReports extends PlagiarismSearchService
      * @param array $ids
      * @return $this
      */
-    public function reports(array $ids): ListReports
+    public function reports(array $report_ids): ListReports
     {
-        $this->report_ids = $ids;
+        $this->report_ids = $report_ids;
         return $this;
     }
 
@@ -69,7 +69,7 @@ class ListReports extends PlagiarismSearchService
         return $this;
     }
 
-    protected function fetch()
+    public function fetch()
     {
         $data = [];
         $this->report_ids ? array_push($data, ['ids' => $this->report_ids]) : $this->relax();
