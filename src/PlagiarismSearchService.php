@@ -3,26 +3,27 @@
 namespace Michaelgatuma\PlagiarismSearch;
 
 use CURLFile;
-use http\Client\Response;
-use Illuminate\Http\JsonResponse;
 
 abstract class PlagiarismSearchService
 {
-    protected string $baseUrl = 'https://plagiarismsearch.com/api/v3';
-    private $apiUser;
-    private $apiKey;
     public const SHOW_BASIC_REPORT_INFO = 0;
     public const SHOW_ALL_REPORT_DATA = 1;
     public const SHOW_RAW_REPORT_DATA = -1;
     public const SHOW_REPORT_SOURCES_BY_PLAGIARISM_TEST = -2;
     public const SHOW_HTML_REPORT_CONTENT = -3;
 
+    protected string $baseUrl;
+    private string $apiUser;
+    private string $apiKey;
+
     public function __construct()
     {
+        $this->baseUrl = config('plagiarism-search.base_url');
+
         $config = [
-            'apiUrl' => 'https://plagiarismsearch.com/api/v3',
-            'apiUser' => 'laptou@berserkertech.xyz',
-            'apiKey' => '2ntdg21tj1tkg51en4cjkg-148383655',
+            'apiUrl' => config('plagiarism-search.base_url'),
+            'apiUser' => config('plagiarism-search.api_user'),
+            'apiKey' => config('plagiarism-search.api_key')
         ];
 
         if (!empty($config)) {
@@ -45,6 +46,7 @@ abstract class PlagiarismSearchService
      * @param $url
      * @param array $post
      * @param array $files
+     * @return mixed
      */
     protected function post($url, array $post = array(), array $files = array())
     {
