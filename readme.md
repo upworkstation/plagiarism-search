@@ -17,6 +17,66 @@ $ composer require michaelgatuma/plagiarism-search
 
 ## Usage
 
+Publish the config file
+
+``` bash
+$ php artisan vendor:publish --provider="Michaelgatuma\PlagiarismSearch\PlagiarismSearchServiceProvider" --tag="config"
+```
+
+### Creating Report
+
+``` php
+PlagiarismSearch::createReport()
+    ->title("Plagiarism Sample Report")
+    ->text(" lorem ipsum dolor sit ....")//Text for check.
+    ->file(realpath('pdf-sample.pdf'))//Or upload file for check.
+    ->files([
+        realpath('pdf-sample.pdf'),
+        realpath('pdf-sample2.pdf')
+    ])//Or array of real paths
+    ->create();
+```
+
+### Deleting Report
+
+``` php
+PlagiarismSearch::deleteReport(24332)->commit();
+```
+
+### Listing Report
+
+``` php
+PlagiarismSearch::listReports()
+    ->reports(['324423', '231232'])//optional
+    ->limit(20)//optional (default:10)
+    ->pages(2)//optional (default:1)
+    ->fetch();
+```
+
+### Updating Report
+
+``` php
+PlagiarismSearch::updateReport(743845)
+    ->fields([
+        'auth_key' => md5('secret'),
+        'remote_id' => 'my-remote-id-100',
+        'callback_url' => 'https://public-url.com/callback.php?id=743845',
+        'title' => 'Title ',
+    ])->commit();
+```
+
+### Viewing Report
+
+``` php
+PlagiarismSearch::viewReport(746734)->fetch();
+```
+
+### Report Status
+
+``` php
+PlagiarismSearch::getReportStatus(233231)->fetch();
+```
+
 ## Change log
 
 Please see the [changelog](changelog.md) for more information on what has changed recently.
