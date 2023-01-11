@@ -24,7 +24,10 @@ class CreateReport extends PlagiarismSearchService
      */
     public function file(string $realpath): CreateReport
     {
-        $this->data = array_merge($this->data, ['file' => $realpath]);
+        $this->files = [
+            'file' => $realpath,
+        ];
+
         return $this;
     }
 
