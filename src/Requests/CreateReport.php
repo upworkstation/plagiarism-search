@@ -19,7 +19,7 @@ class CreateReport extends PlagiarismSearchService
     }
 
     /**
-     * @param string $file
+     * @param string $realpath
      * @return CreateReport
      */
     public function file(string $realpath): CreateReport

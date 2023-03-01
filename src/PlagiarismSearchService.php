@@ -11,7 +11,6 @@ abstract class PlagiarismSearchService
     public const SHOW_RAW_REPORT_DATA = -1;
     public const SHOW_REPORT_SOURCES_BY_PLAGIARISM_TEST = -2;
     public const SHOW_HTML_REPORT_CONTENT = -3;
-
     protected string $baseUrl;
     private string $apiUser;
     private string $apiKey;
@@ -48,7 +47,7 @@ abstract class PlagiarismSearchService
      * @param array $files
      * @return mixed
      */
-    protected function post($url, array $post = array(), array $files = array())
+    protected function post($url, array $post = array(), array $files = array()): mixed
     {
         $curl = curl_init($url);
 

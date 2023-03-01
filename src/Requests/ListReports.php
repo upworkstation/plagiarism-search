@@ -10,7 +10,7 @@ class ListReports extends PlagiarismSearchService
     protected int $remote_id = 0;
     protected int $pages = 1;
     protected int $limit = 10;
-    protected int $show_relations = 1;
+    protected int $show_relations = 0;
 
     private function relax(): void
     {/*do absolutely nothing*/
@@ -60,10 +60,16 @@ class ListReports extends PlagiarismSearchService
     }
 
     /**
+     * Return report relations. (Full report data). Acceptable values are:
+     * 0: Returns basic information of report (default).
+     * 1: Returns all report data as tree. Paragraphs, sentences and sources with highlight text (`data.paragraphs` response field).
+     * -1: Returns all report raw data (`data.paragraphs`, `data.blocks`, `data.sources` response fields).
+     * -2: Returns list of sources ordered by plagiarism percent (`data.sources` response field).
+     * -3: Returns html report content (`data.html` response field).
      * @param int $show_relations
      * @return ListReports
      */
-    public function relations(int $show_relations): ListReports
+    public function relations(int $show_relations = 0): ListReports
     {
         $this->show_relations = $show_relations;
         return $this;
@@ -74,7 +80,7 @@ class ListReports extends PlagiarismSearchService
         $data = [];
         $this->report_ids ? array_push($data, ['ids' => $this->report_ids]) : $this->relax();
         $this->remote_id ? array_push($data, ['remote_id' => $this->remote_id]) : $this->relax();
-        array_push($data, ...[
+        $data=array_merge($data, [
             'page' => $this->pages,
             'limit' => $this->limit,
             'show_relations' => $this->show_relations

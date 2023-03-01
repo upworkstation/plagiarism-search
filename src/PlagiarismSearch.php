@@ -16,7 +16,7 @@ class PlagiarismSearch
      * Add new report (Submit the document to check)
      * @return CreateReport
      */
-    public function createReport(): CreateReport
+    public static function createReport(): CreateReport
     {
         return new CreateReport();
     }
@@ -26,7 +26,7 @@ class PlagiarismSearch
      * @param $id
      * @return DeleteReport
      */
-    public function deleteReport($id): DeleteReport
+    public static function deleteReport($id): DeleteReport
     {
         return new DeleteReport($id);
     }
@@ -35,7 +35,7 @@ class PlagiarismSearch
      * List of reports
      * @return ListReports
      */
-    public function listReports(): ListReports
+    public static function listReports(): ListReports
     {
         return new ListReports();
     }
@@ -45,7 +45,7 @@ class PlagiarismSearch
      * @param $id
      * @return UpdateReport
      */
-    public function updateReport($id): UpdateReport
+    public static function updateReport($id): UpdateReport
     {
         return new UpdateReport($id);
     }
@@ -55,7 +55,7 @@ class PlagiarismSearch
      * @param $id
      * @return ViewReport
      */
-    public function viewReport($id): ViewReport
+    public static function viewReport($id): ViewReport
     {
         return new ViewReport($id);
     }
@@ -65,7 +65,7 @@ class PlagiarismSearch
      * @param $id
      * @return ViewReportStatus
      */
-    public function getReportStatus($id): ViewReportStatus
+    public static function getReportStatus($id): ViewReportStatus
     {
         return new ViewReportStatus($id);
     }
